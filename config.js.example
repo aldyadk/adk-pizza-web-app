@@ -1,0 +1,12 @@
+module.exports = {
+  httpPort: 3000,
+  httpsPort: 3001,
+  envName: "xxxxx",
+  hashingSecret: "xxxxxxxxx",
+  stripeApiKey: "xxxxxx",
+  mailgunApiKey: "xxxxxxx",
+  mailgunPath:
+    "/v3/sandboxxxxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org/messages",
+  mailgunSender:
+    "<postmaster@sandboxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org>",
+};
