@@ -1,4 +1,4 @@
-# aldyadk's Homework assignment #2
+# aldyadk's Homework assignment #3
 
 Repository of [Pirple's](https://pirple.thinkific.com) Nodejs Masterclass Course
 
@@ -8,9 +8,9 @@ Repository of [Pirple's](https://pirple.thinkific.com) Nodejs Masterclass Course
 
 ## API Definition
 
-### /users
+### api/users
 
-#### [POST]  http://localhost:3000/users
+#### [POST]  http://localhost:3000/api/users
 
 
 Example payload request:
@@ -25,7 +25,7 @@ Example payload request:
 ```
 
 
-#### [GET]  http://localhost:3000/users?id=xxxxxxxxxHASHEDEMAILADDRESSxxxxxxxxx
+#### [GET]  http://localhost:3000/api/users?id=xxxxxxxxxHASHEDEMAILADDRESSxxxxxxxxx
 
 Requires token string in header,
 
@@ -34,7 +34,7 @@ token : xxxxxxxTOKENxxxxxxx
 The required id in querystring is the hashed email address
 
 
-#### [PUT]  http://localhost:3000/users
+#### [PUT]  http://localhost:3000/api/users
 
 Requires token string in header,
 
@@ -49,7 +49,7 @@ token : xxxxxxxTOKENxxxxxxx
 }
 ```
 
-#### [DELETE] http://localhost:3000/users?id=xxxxxxxxxHASHEDEMAILADDRESSxxxxxxxxx
+#### [DELETE] http://localhost:3000/api/users?id=xxxxxxxxxHASHEDEMAILADDRESSxxxxxxxxx
 
 Requires token string in header,
 
@@ -57,9 +57,9 @@ token : xxxxxxxTOKENxxxxxxx
 
 
 
-### /login
+### api/login
 
-#### [POST]  http://localhost:3000/login
+#### [POST]  http://localhost:3000/api/login
 
 ```json
 {
@@ -69,9 +69,9 @@ token : xxxxxxxTOKENxxxxxxx
 }
 ```
 
-### /logout
+### api/logout
 
-#### [POST]  http://localhost:3000/logout
+#### [POST]  http://localhost:3000/api/logout
 
 Requires token string in header,
 
@@ -80,9 +80,9 @@ token : xxxxxxxTOKENxxxxxxx
 Note: it removes the token from the system itself.
 
 
-### /show-menu
+### api/show-menu
 
-#### [GET] http://localhost:3000/show-menu
+#### [GET] http://localhost:3000/api/show-menu
 
 Requires token string in header,
 
@@ -92,7 +92,7 @@ Returns the list of possible pizza's to select,
 
 ### /add-to-cart
 
-#### [POST] http://localhost:3000/add-to-cart
+#### [POST] http://localhost:3000/api/add-to-cart
 
 Requires token string in header,
 
@@ -110,9 +110,9 @@ Valid names: veggieGarden, meatLovers, splitza, superSupreme, pepperoniJalapeno,
 
 
 
-### /checkout-order
+### api/checkout-order
 
-#### [POST] http://localhost:3000/checkout-order
+#### [POST] http://localhost:3000/api/checkout-order
 
 Requires token string in header,
 

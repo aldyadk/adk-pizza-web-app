@@ -68,10 +68,13 @@ app.unifiedServer = function(req, res) {
   req.on("end", function() {
     tempBuffer += decoder.end();
 
-    const choosenHandler =
+    let choosenHandler =
       typeof app.router[trimmedPath] !== "undefined"
         ? app.router[trimmedPath]
         : app.router.notFound;
+
+    choosenHandler =
+      trimmedPath.indexOf("public/") > -1 ? handlers.public : choosenHandler;
 
     const data = {
       trimmedPath,
@@ -81,12 +84,47 @@ app.unifiedServer = function(req, res) {
       payload: helpers.parseJsonToObject(tempBuffer),
     };
 
-    choosenHandler(data, function(statusCode, payloadObject) {
+    choosenHandler(data, function(statusCode, payload, contentType) {
+      contentType = typeof contentType === "string" ? contentType : "json";
       statusCode = typeof statusCode === "number" ? statusCode : 200;
-      payloadObject = typeof payloadObject === "object" ? payloadObject : {};
-      const payloadString = JSON.stringify(payloadObject);
 
-      res.setHeader("Content-Type", "aplication/json");
+      let payloadString = "";
+      if (contentType === "json") {
+        res.setHeader("Content-Type", "application/json");
+        payload = typeof payload === "object" ? payload : {};
+        payloadString = JSON.stringify(payload);
+      }
+
+      if (contentType === "html") {
+        res.setHeader("Content-Type", "text/html");
+        payloadString = typeof payload === "string" ? payload : "";
+      }
+
+      if (contentType === "favicon") {
+        res.setHeader("Content-Type", "image/x-icon");
+        payloadString = typeof payload !== "undefined" ? payload : "";
+      }
+
+      if (contentType === "css") {
+        res.setHeader("Content-Type", "text/css");
+        payloadString = typeof payload !== "undefined" ? payload : "";
+      }
+
+      if (contentType === "png") {
+        res.setHeader("Content-Type", "image/png");
+        payloadString = typeof payload !== "undefined" ? payload : "";
+      }
+
+      if (contentType === "jpg") {
+        res.setHeader("Content-Type", "image/jpeg");
+        payloadString = typeof payload !== "undefined" ? payload : "";
+      }
+
+      if (contentType === "plain") {
+        res.setHeader("Content-Type", "text/plain");
+        payloadString = typeof payload !== "undefined" ? payload : "";
+      }
+
       res.writeHead(statusCode);
       res.end(payloadString);
 
@@ -102,11 +140,22 @@ app.unifiedServer = function(req, res) {
 };
 
 app.router = {
-  users: handlers.users,
-  login: handlers.login,
-  logout: handlers.logout,
-  "show-menu": handlers.menu,
-  "add-to-cart": handlers.addToCart,
-  "checkout-order": handlers.checkout,
+  "": handlers.homePage,
+  "api/users": handlers.users,
+  "api/login": handlers.login,
+  "api/logout": handlers.logout,
+  "api/update-token": handlers.updateToken,
+  "api/show-menu": handlers.menu,
+  "api/add-to-cart": handlers.addToCart,
+  "api/checkout-order": handlers.checkout,
   notFound: handlers.notFound,
+  "favicon.ico": handlers.favicon,
+  public: handlers.public,
+  "account/create": handlers.accountCreate,
+  "account/edit": handlers.accountEdit,
+  "account/deleted": handlers.accountDeleted,
+  "session/create": handlers.sessionCreate,
+  "session/deleted": handlers.sessionDeleted,
+  "order-page": handlers.orderPage,
+  "checkout-order": handlers.checkoutOrder,
 };
