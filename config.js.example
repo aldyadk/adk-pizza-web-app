@@ -9,4 +9,10 @@ module.exports = {
     "/v3/sandboxxxxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org/messages",
   mailgunSender:
     "<postmaster@sandboxxxxxxxxxxxxxxxxxxxxxxxx.mailgun.org>",
+  templateGlobals: {
+    appName: "ADK PIZZA ONLINE ORDER",
+    companyName: "ADK PIZZA",
+    yearCreated: "2019",
+    baseUrl: "http://localhost:3000/",
+  },
 };
