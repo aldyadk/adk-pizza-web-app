@@ -332,6 +332,7 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
 
   // If the user just created a new check successfully, redirect back to the dashboard
   if (formId == "checkoutOrder") {
+    alert('Your order is being processed! Check your email for receipt')
     window.location = "/order-page";
   }
 };
